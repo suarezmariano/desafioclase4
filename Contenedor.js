@@ -14,11 +14,13 @@ class Contenedor {
         `./${this.archivo}`,
         JSON.stringify([...datosParsed, producto], null, 2)
       );
+      console.log('Producto Agregado');
     } catch (err) {
       fs.writeFileSync(
         `./${this.archivo}`,
         JSON.stringify([{ ...producto, id: 1 }])
       );
+      console.log('Producto Agregado');
     }
   }
 
@@ -42,7 +44,8 @@ class Contenedor {
   }
 
   deleteAll() {
-    fs.writeFileSync('./productos.txt', '');
+    fs.writeFileSync(this.archivo, '');
+    return 'Archivo borrado';
   }
 
   deleteByID(id) {
@@ -51,7 +54,8 @@ class Contenedor {
       const datosParsed = JSON.parse(datos);
       const idToDelete = datosParsed.map((producto) => producto.id).indexOf(id);
       datosParsed.splice(idToDelete, 1);
-      fs.writeFileSync('./productos.txt', JSON.stringify(datosParsed));
+      fs.writeFileSync('./productos.txt', JSON.stringify(datosParsed, null, 2));
+      return 'Id Eliminado';
     } catch (err) {
       console.log('El ID no pudo ser eliminado');
     }
@@ -78,7 +82,7 @@ test.save({
   thumbnail: 'www.google.com',
 });*/
 
-//console.log(test.deleteByID(1));
+console.log(test.deleteByID(3));
 
 //console.log(test.getAll());
 //console.log(test.getById(3));

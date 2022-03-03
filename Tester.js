@@ -20,3 +20,4 @@ test.save({
 
 console.log(test.getAll());
 console.log(test.getById(3));
+console.log(test.deleteAll());
