@@ -17,3 +17,6 @@ test.save({
   price: '33',
   thumbnail: 'www.google.com',
 });
+
+console.log(test.getAll());
+console.log(test.getById(3));

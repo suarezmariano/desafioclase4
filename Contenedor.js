@@ -24,7 +24,7 @@ class Contenedor {
 
   getAll() {
     try {
-      const contenido = fs.readFileSync('./productos.txt');
+      const contenido = fs.readFileSync(this.archivo);
       return JSON.parse(contenido);
     } catch (error) {
       console.log('No se pudo leer el archivo');
@@ -34,7 +34,7 @@ class Contenedor {
   getById(id) {
     try {
       const productos = fs.readFileSync(this.archivo);
-      productosParsed = JSON.parse(productos);
+      let productosParsed = JSON.parse(productos);
       return productosParsed.find((producto) => id === producto.id);
     } catch (err) {
       console.log('Error');
@@ -58,7 +58,7 @@ class Contenedor {
   }
 }
 
-const test = new Contenedor('./productos.txt');
+const test = new Contenedor('productos.txt');
 /*
 test.save({
   title: 'Mesa',
@@ -80,7 +80,7 @@ test.save({
 
 //console.log(test.deleteByID(1));
 
-console.log(test.getAll());
-//console.log(test.getById(1));
+//console.log(test.getAll());
+//console.log(test.getById(3));
 
 //console.log(test.deleteAll());
