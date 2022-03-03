@@ -1,8 +1,9 @@
 const fs = require('fs');
+const { Module } = require('module');
 
 class Contenedor {
-  constructor(nombre) {
-    this.archivo = nombre;
+  constructor(archivo) {
+    this.archivo = archivo;
   }
 
   async save(producto) {
@@ -45,12 +46,12 @@ class Contenedor {
 
   deleteAll() {
     fs.writeFileSync(this.archivo, '');
-    return 'Archivo borrado';
+    return 'Archivo Borrado';
   }
 
   deleteByID(id) {
     try {
-      const datos = fs.readFileSync('productos.txt');
+      const datos = fs.readFileSync(this.archivo);
       const datosParsed = JSON.parse(datos);
       const idToDelete = datosParsed.map((producto) => producto.id).indexOf(id);
       datosParsed.splice(idToDelete, 1);
@@ -60,31 +61,11 @@ class Contenedor {
       console.log('El ID no pudo ser eliminado');
     }
   }
+
+  deleteFile() {
+    fs.unlinkSync(this.archivo);
+    return 'Archivo Eliminado';
+  }
 }
 
-const test = new Contenedor('productos.txt');
-/*
-test.save({
-  title: 'Mesa',
-  price: '123',
-  thumbnail: 'www.google.com',
-});
-
-test.save({
-  title: 'Silla',
-  price: '22',
-  thumbnail: 'www.google.com',
-});
-
-test.save({
-  title: 'Cama',
-  price: '33',
-  thumbnail: 'www.google.com',
-});*/
-
-console.log(test.deleteByID(3));
-
-//console.log(test.getAll());
-//console.log(test.getById(3));
-
-//console.log(test.deleteAll());
+module.exports = Contenedor;
