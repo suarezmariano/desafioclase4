@@ -1,5 +1,4 @@
 const fs = require('fs');
-const { Module } = require('module');
 
 class Contenedor {
   constructor(archivo) {
@@ -13,7 +12,7 @@ class Contenedor {
       producto['id'] = datosParsed[datosParsed.length - 1].id + 1;
       fs.writeFileSync(
         `./${this.archivo}`,
-        JSON.stringify([...datosParsed, producto], null, 2)
+        JSON.stringify([...datosParsed, producto])
       );
       console.log('Producto Agregado');
     } catch (err) {
